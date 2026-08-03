@@ -1,0 +1,23 @@
+# Environment
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Generated data / vector store artifacts (created by ingestion, not committed)
+data/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+*.log
