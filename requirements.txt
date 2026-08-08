@@ -4,3 +4,8 @@ uvicorn
 pydantic
 pydantic-settings
 python-dotenv
+
+# --- arXiv ingestion ------------------------------------------------------------
+requests
+feedparser          # parses arXiv's Atom API XML responses
+tenacity            # retry/backoff for transient network failures
