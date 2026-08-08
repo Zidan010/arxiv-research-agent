@@ -13,6 +13,11 @@ Configuration is read from Settings :
 import json
 import logging
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from app.config import get_settings
 from app.ingestion.arxiv_client import ArxivClient

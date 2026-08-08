@@ -1,9 +1,15 @@
+from pathlib import Path
+import sys
 import logging
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from fastapi import FastAPI
 
-from config import get_settings
-from logging_config import configure_logging
+from app.config import get_settings
+from app.logging_config import configure_logging
 
 configure_logging()
 logger = logging.getLogger(__name__)
