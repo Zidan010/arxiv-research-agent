@@ -187,3 +187,27 @@ class ArxivClient:
         paper.source_available = True
         logger.info("Downloaded source for %s -> %s", paper.arxiv_id, target_path)
         return paper
+
+    def fetch_pdf(self, paper: Paper, destination_dir: Path) -> Path | None:
+        """
+        Downloads the rendered PDF for a paper. Used only by the parsing
+        fallback path, for papers where fetch_source() found no LaTeX
+        source available. Shares the same rate limiter as every other
+        request this client makes.
+        """
+        if not paper.pdf_url:
+            logger.warning("No pdf_url recorded for %s; cannot fetch PDF fallback.", paper.arxiv_id)
+            return None
+ 
+        destination_dir.mkdir(parents=True, exist_ok=True)
+        target_path = destination_dir / f"{paper.arxiv_id.replace('/', '_')}.pdf"
+ 
+        try:
+            response = self._get(paper.pdf_url)
+        except requests.RequestException as exc:
+            logger.error("Failed to download PDF for %s: %s", paper.arxiv_id, exc)
+            return None
+ 
+        target_path.write_bytes(response.content)
+        logger.info("Downloaded PDF fallback for %s -> %s", paper.arxiv_id, target_path)
+        return target_path

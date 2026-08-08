@@ -5,7 +5,9 @@ pydantic
 pydantic-settings
 python-dotenv
 
-# --- arXiv ingestion ------------------------------------------------------------
-requests
+# --- arXiv ingestion --- 
 feedparser          # parses arXiv's Atom API XML responses
 tenacity            # retry/backoff for transient network failures
+
+# --- arXiv parser --- 
+pdfplumber

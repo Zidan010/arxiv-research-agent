@@ -36,6 +36,12 @@ class Settings(BaseSettings):
     ARXIV_RATE_LIMIT_SECONDS: float = 3.0
     RAW_DATA_DIR: str = "data/raw"
 
+    # --- Parsing -----------------------------------------------------------
+    PROCESSED_DATA_DIR: str = "data/processed"
+    # Target max characters per chunk (soft limit — a chunk only exceeds this
+    # if a single paragraph, kept intact, is already longer on its own).
+    PARSING_MAX_CHUNK_CHARS: int = 1200
+
 @lru_cache
 def get_settings() -> Settings:
     """
