@@ -1,0 +1,6 @@
+# --- API framework ---
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+python-dotenv
