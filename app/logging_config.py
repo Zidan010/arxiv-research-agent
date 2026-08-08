@@ -8,7 +8,7 @@ LOG_LEVEL environment variable so verbosity can be adjusted per-environment with
 import logging
 import sys
 
-from config import get_settings
+from app.config import get_settings
 
 
 def configure_logging() -> None:

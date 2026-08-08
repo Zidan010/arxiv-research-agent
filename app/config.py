@@ -27,7 +27,14 @@ class Settings(BaseSettings):
 
     # --- Logging -------------------------------------------------------------
     LOG_LEVEL: str = "INFO"
-
+    
+    # --- Ingestion (arXiv) -----------------------------------------------------
+    ARXIV_CATEGORY: str = "cs.AI"
+    ARXIV_MAX_RESULTS: int = 10
+    # arXiv's documented limit is 3 requests/second; default throttles to
+    # comfortably below that (one request every 3 seconds).
+    ARXIV_RATE_LIMIT_SECONDS: float = 3.0
+    RAW_DATA_DIR: str = "data/raw"
 
 @lru_cache
 def get_settings() -> Settings:
