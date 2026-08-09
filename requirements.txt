@@ -15,3 +15,7 @@ pdfplumber
 # --- Embeddings ---
 sentence-transformers
 numpy
+
+# --- Vector store ---
+faiss-cpu
+ 

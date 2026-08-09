@@ -48,6 +48,13 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
     EMBEDDING_BATCH_SIZE: int = 32
 
+    # --- Vector store --------------------------------------------------------
+    VECTOR_STORE_DIR: str = "data/vector_store"
+    # Default number of chunks retrieved per query, and the cap on how many
+    # of those may come from a single paper (see FaissVectorStore.search).
+    RETRIEVAL_TOP_K: int = 6
+    RETRIEVAL_MAX_CHUNKS_PER_PAPER: int = 2
+
 @lru_cache
 def get_settings() -> Settings:
     """
