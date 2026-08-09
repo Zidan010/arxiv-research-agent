@@ -18,4 +18,6 @@ numpy
 
 # --- Vector store ---
 faiss-cpu
- 
+
+# --- LLM providers ----------------------------------------------------------
+groq

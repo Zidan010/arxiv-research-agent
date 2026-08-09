@@ -55,6 +55,20 @@ class Settings(BaseSettings):
     RETRIEVAL_TOP_K: int = 6
     RETRIEVAL_MAX_CHUNKS_PER_PAPER: int = 2
 
+    # --- LLM (synthesis) -------------------------------------------------------
+    LLM_PROVIDER: str = "groq"  # "groq" | "openai"
+ 
+    GROQ_API_KEY: str = ""
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"
+ 
+    OPENAI_API_KEY: str = ""
+    OPENAI_MODEL: str = "gpt-4o-mini"
+ 
+    LLM_MAX_TOKENS: int = 1024
+    # Kept low (rather than a more "creative" default) since this system
+    # synthesizes factual claims from retrieved research, not open-ended text.
+    LLM_TEMPERATURE: float = 0.3 
+
 @lru_cache
 def get_settings() -> Settings:
     """
