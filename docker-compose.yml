@@ -1,0 +1,42 @@
+# Run the API with:                 docker-compose up
+# Run the ingestion pipeline with:  docker-compose --profile pipeline run --rm pipeline
+#
+# The vector store is FAISS -- an embedded, file-based index rather than a
+# separate database server (see ARCHITECTURE.md). There is deliberately no
+# separate "vector-db" container: FAISS's index + metadata sidecar live on
+# the `./data` bind mount, persisted across container restarts, which is
+# what satisfies "spin up the API and Vector DB with a single command" here
+# without running an unnecessary extra service.
+#
+# `pipeline` is a separate, profile-gated service (not started by plain
+# `docker-compose up`) because ingestion is something you run once or
+# periodically, not something that should re-run every time the API
+# container restarts.
+
+services:
+  api:
+    build: .
+    image: arxiv-research-agent:latest
+    container_name: arxiv-research-agent-api
+    ports:
+      - "${API_PORT:-8000}:${API_PORT:-8000}"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  pipeline:
+    build: .
+    image: arxiv-research-agent:latest
+    container_name: arxiv-research-agent-pipeline
+    profiles: ["pipeline"]
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    command: >
+      sh -c "python -m scripts.ingest &&
+             python -m scripts.parse &&
+             python -m scripts.embed &&
+             python -m scripts.build_index"

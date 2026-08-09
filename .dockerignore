@@ -1,0 +1,25 @@
+# Version control
+.git/
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Environment (never bake secrets into the image; passed at runtime via env_file)
+.env
+
+# Generated data (mounted as a volume at runtime, not part of the image)
+data/
+
+# Docs / misc not needed inside the container
+README.md
+ARCHITECTURE.md
+*.md
+.DS_Store
