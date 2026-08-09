@@ -61,9 +61,6 @@ class Settings(BaseSettings):
     GROQ_API_KEY: str = ""
     GROQ_MODEL: str = "llama-3.3-70b-versatile"
  
-    OPENAI_API_KEY: str = ""
-    OPENAI_MODEL: str = "gpt-4o-mini"
- 
     LLM_MAX_TOKENS: int = 1024
     # Kept low (rather than a more "creative" default) since this system
     # synthesizes factual claims from retrieved research, not open-ended text.
