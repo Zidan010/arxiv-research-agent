@@ -42,6 +42,12 @@ class Settings(BaseSettings):
     # if a single paragraph, kept intact, is already longer on its own).
     PARSING_MAX_CHUNK_CHARS: int = 1200
 
+    # --- Embeddings --------------------------------------------------------
+    # Local sentence-transformers model name (downloaded once, cached by the
+    # library — no API key required).
+    EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
+    EMBEDDING_BATCH_SIZE: int = 32
+
 @lru_cache
 def get_settings() -> Settings:
     """

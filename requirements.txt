@@ -11,3 +11,7 @@ tenacity            # retry/backoff for transient network failures
 
 # --- arXiv parser --- 
 pdfplumber
+
+# --- Embeddings ---
+sentence-transformers
+numpy
